@@ -52,3 +52,8 @@ DISABLE TRIGGER [ddlDatabaseTriggerLog] ON DATABASE
 GO
 
 
+
+DISABLE TRIGGER [ddlDatabaseTriggerLog] ON DATABASE
+GO
+
+

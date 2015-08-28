@@ -240,3 +240,81 @@ GO
 
 
 
+
+ALTER TABLE [HumanResources].[Employee] WITH NOCHECK
+  ADD 
+
+ALTER TABLE [HumanResources].[Employee]
+  NOCHECK CONSTRAINT [CK_Employee_Gender]
+GO
+
+ALTER TABLE [HumanResources].[Employee] WITH NOCHECK
+  ADD 
+
+ALTER TABLE [HumanResources].[Employee]
+  CHECK CONSTRAINT [CK_Employee_MaritalStatus]
+GO
+
+ALTER TABLE [HumanResources].[Employee] WITH NOCHECK
+  ADD 
+
+ALTER TABLE [HumanResources].[Employee]
+  CHECK CONSTRAINT [CK_Employee_VacationHours]
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DISABLE TRIGGER [HumanResources].[dEmployee] ON [HumanResources].Employee
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
