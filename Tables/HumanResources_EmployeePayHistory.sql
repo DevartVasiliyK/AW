@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [HumanResources].[EmployeePayHistory] (
+  [added] [int] NULL,
   [EmployeeID] [int] NOT NULL,
-  [RateChangeDate] [datetime] NOT NULL,
-  [Rate] [money] NOT NULL,
-  [PayFrequency] [tinyint] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_EmployeePayHistory_ModifiedDate] DEFAULT (getdate()),
+  [PayFrequency] [tinyint] NOT NULL,
+  [Rate] [money] NOT NULL,
+  [RateChangeDate] [datetime] NOT NULL,
   CONSTRAINT [PK_EmployeePayHistory_EmployeeID_RateChangeDate] PRIMARY KEY CLUSTERED ([EmployeeID], [RateChangeDate]),
   CONSTRAINT [CK_EmployeePayHistory_PayFrequency] CHECK ([PayFrequency]=(2) OR [PayFrequency]=(1)),
   CONSTRAINT [CK_EmployeePayHistory_Rate] CHECK ([Rate]>=(6.50) AND [Rate]<=(200.00)),
@@ -32,3 +33,17 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Employee.EmployeeID.', 'SCHEMA', N'HumanResources', 'TABLE', N'EmployeePayHistory', 'CONSTRAINT', N'FK_EmployeePayHistory_Employee_EmployeeID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+

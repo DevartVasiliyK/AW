@@ -1,10 +1,11 @@
 ﻿CREATE TABLE [Sales].[Customer] (
-  [CustomerID] [int] IDENTITY NOT FOR REPLICATION,
-  [TerritoryID] [int] NULL,
   [AccountNumber] AS (isnull('AW'+[dbo].[ufnLeadingZeros]([CustomerID]),'')),
+  [added] [int] NULL,
+  [CustomerID] [int] IDENTITY NOT FOR REPLICATION,
   [CustomerType] [nchar](1) NOT NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Customer_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Customer_ModifiedDate] DEFAULT (getdate()),
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Customer_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [TerritoryID] [int] NULL,
   CONSTRAINT [PK_Customer_CustomerID] PRIMARY KEY CLUSTERED ([CustomerID]),
   CONSTRAINT [CK_Customer_CustomerType] CHECK (upper([CustomerType])='I' OR upper([CustomerType])='S'),
   CONSTRAINT [FK_Customer_SalesTerritory_TerritoryID] FOREIGN KEY ([territoryid]) REFERENCES [Sales].[SalesTerritory] ([territoryid])
@@ -56,3 +57,29 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing SalesTerritory.TerritoryID.', 'SCHEMA', N'Sales', 'TABLE', N'Customer', 'CONSTRAINT', N'FK_Customer_SalesTerritory_TerritoryID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,5 @@
 ﻿CREATE TABLE [Sales].[CountryRegionCurrency] (
+  [added] [int] NULL,
   [CountryRegionCode] [nvarchar](3) NOT NULL,
   [CurrencyCode] [nchar](3) NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_CountryRegionCurrency_ModifiedDate] DEFAULT (getdate()),
@@ -34,3 +35,19 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Currency.CurrencyCode.', 'SCHEMA', N'Sales', 'TABLE', N'CountryRegionCurrency', 'CONSTRAINT', N'FK_CountryRegionCurrency_Currency_CurrencyCode'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

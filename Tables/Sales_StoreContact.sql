@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [Sales].[StoreContact] (
-  [CustomerID] [int] NOT NULL,
+  [added] [int] NULL,
   [ContactID] [int] NOT NULL,
   [ContactTypeID] [int] NOT NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_StoreContact_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [CustomerID] [int] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_StoreContact_ModifiedDate] DEFAULT (getdate()),
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_StoreContact_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   CONSTRAINT [PK_StoreContact_CustomerID_ContactID] PRIMARY KEY CLUSTERED ([CustomerID], [ContactID]),
   CONSTRAINT [FK_StoreContact_Contact_ContactID] FOREIGN KEY ([contactid]) REFERENCES [Person].[Contact] ([contactid]),
   CONSTRAINT [FK_StoreContact_ContactType_ContactTypeID] FOREIGN KEY ([contacttypeid]) REFERENCES [Person].[ContactType] ([contacttypeid]),
@@ -59,3 +60,31 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Store.CustomerID.', 'SCHEMA', N'Sales', 'TABLE', N'StoreContact', 'CONSTRAINT', N'FK_StoreContact_Store_CustomerID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

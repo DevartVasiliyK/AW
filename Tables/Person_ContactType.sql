@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [Person].[ContactType] (
+  [added] [int] NULL,
   [ContactTypeID] [int] IDENTITY,
-  [Name] [dbo].[Name] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ContactType_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
   CONSTRAINT [PK_ContactType_ContactTypeID] PRIMARY KEY CLUSTERED ([ContactTypeID])
 )
 ON [PRIMARY]
@@ -26,3 +27,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Person', 'TABLE', N'ContactType', 'CONSTRAINT', N'DF_ContactType_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

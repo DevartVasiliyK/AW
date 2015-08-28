@@ -1,12 +1,13 @@
 ﻿CREATE TABLE [Person].[Address] (
+  [added] [int] NULL,
   [AddressID] [int] IDENTITY NOT FOR REPLICATION,
   [AddressLine1] [nvarchar](60) NOT NULL,
   [AddressLine2] [nvarchar](60) NULL,
   [City] [nvarchar](30) NOT NULL,
-  [StateProvinceID] [int] NOT NULL,
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Address_ModifiedDate] DEFAULT (getdate()),
   [PostalCode] [nvarchar](15) NOT NULL,
   [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Address_rowguid] DEFAULT (newid()) ROWGUIDCOL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Address_ModifiedDate] DEFAULT (getdate()),
+  [StateProvinceID] [int] NOT NULL,
   CONSTRAINT [PK_Address_AddressID] PRIMARY KEY CLUSTERED ([AddressID]),
   CONSTRAINT [FK_Address_StateProvince_StateProvinceID] FOREIGN KEY ([stateprovinceid]) REFERENCES [Person].[StateProvince] ([stateprovinceid])
 )
@@ -54,3 +55,27 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing StateProvince.StateProvinceID.', 'SCHEMA', N'Person', 'TABLE', N'Address', 'CONSTRAINT', N'FK_Address_StateProvince_StateProvinceID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,13 +1,14 @@
 ﻿CREATE TABLE [Production].[TransactionHistoryArchive] (
-  [TransactionID] [int] NOT NULL,
+  [ActualCost] [money] NOT NULL,
+  [added] [int] NULL,
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_TransactionHistoryArchive_ModifiedDate] DEFAULT (getdate()),
   [ProductID] [int] NOT NULL,
+  [Quantity] [int] NOT NULL,
   [ReferenceOrderID] [int] NOT NULL,
   [ReferenceOrderLineID] [int] NOT NULL CONSTRAINT [DF_TransactionHistoryArchive_ReferenceOrderLineID] DEFAULT (0),
   [TransactionDate] [datetime] NOT NULL CONSTRAINT [DF_TransactionHistoryArchive_TransactionDate] DEFAULT (getdate()),
+  [TransactionID] [int] NOT NULL,
   [TransactionType] [nchar](1) NOT NULL,
-  [Quantity] [int] NOT NULL,
-  [ActualCost] [money] NOT NULL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_TransactionHistoryArchive_ModifiedDate] DEFAULT (getdate()),
   CONSTRAINT [PK_TransactionHistoryArchive_TransactionID] PRIMARY KEY CLUSTERED ([TransactionID]),
   CONSTRAINT [CK_TransactionHistoryArchive_TransactionType] CHECK (upper([TransactionType])='P' OR upper([TransactionType])='S' OR upper([TransactionType])='W')
 )
@@ -50,3 +51,25 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Production', 'TABLE', N'TransactionHistoryArchive', 'CONSTRAINT', N'DF_TransactionHistoryArchive_TransactionDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

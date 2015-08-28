@@ -1,15 +1,16 @@
 ﻿CREATE TABLE [Sales].[SpecialOffer] (
-  [SpecialOfferID] [int] IDENTITY,
+  [added] [int] NULL,
+  [Category] [nvarchar](50) NOT NULL,
   [Description] [nvarchar](255) NOT NULL,
   [DiscountPct] [smallmoney] NOT NULL CONSTRAINT [DF_SpecialOffer_DiscountPct] DEFAULT (0.00),
-  [Type] [nvarchar](50) NOT NULL,
-  [Category] [nvarchar](50) NOT NULL,
-  [StartDate] [datetime] NOT NULL,
   [EndDate] [datetime] NOT NULL,
-  [MinQty] [int] NOT NULL CONSTRAINT [DF_SpecialOffer_MinQty] DEFAULT (0),
   [MaxQty] [int] NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SpecialOffer_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [MinQty] [int] NOT NULL CONSTRAINT [DF_SpecialOffer_MinQty] DEFAULT (0),
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SpecialOffer_ModifiedDate] DEFAULT (getdate()),
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SpecialOffer_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [SpecialOfferID] [int] IDENTITY,
+  [StartDate] [datetime] NOT NULL,
+  [Type] [nvarchar](50) NOT NULL,
   CONSTRAINT [PK_SpecialOffer_SpecialOfferID] PRIMARY KEY CLUSTERED ([SpecialOfferID]),
   CONSTRAINT [CK_SpecialOffer_DiscountPct] CHECK ([DiscountPct]>=(0.00)),
   CONSTRAINT [CK_SpecialOffer_EndDate] CHECK ([EndDate]>=[StartDate]),
@@ -59,3 +60,29 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of NEWID()', 'SCHEMA', N'Sales', 'TABLE', N'SpecialOffer', 'CONSTRAINT', N'DF_SpecialOffer_rowguid'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

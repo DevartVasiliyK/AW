@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [Production].[ProductListPriceHistory] (
-  [ProductID] [int] NOT NULL,
-  [StartDate] [datetime] NOT NULL,
+  [added] [int] NULL,
   [EndDate] [datetime] NULL,
   [ListPrice] [money] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ProductListPriceHistory_ModifiedDate] DEFAULT (getdate()),
+  [ProductID] [int] NOT NULL,
+  [StartDate] [datetime] NOT NULL,
   CONSTRAINT [PK_ProductListPriceHistory_ProductID_StartDate] PRIMARY KEY CLUSTERED ([ProductID], [StartDate]),
   CONSTRAINT [CK_ProductListPriceHistory_EndDate] CHECK ([EndDate]>=[StartDate] OR [EndDate] IS NULL),
   CONSTRAINT [CK_ProductListPriceHistory_ListPrice] CHECK ([ListPrice]>(0.00)),
@@ -32,3 +33,17 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Product.ProductID.', 'SCHEMA', N'Production', 'TABLE', N'ProductListPriceHistory', 'CONSTRAINT', N'FK_ProductListPriceHistory_Product_ProductID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [HumanResources].[EmployeeAddress] (
-  [EmployeeID] [int] NOT NULL,
+  [added] [int] NULL,
   [AddressID] [int] NOT NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_EmployeeAddress_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [EmployeeID] [int] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_EmployeeAddress_ModifiedDate] DEFAULT (getdate()),
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_EmployeeAddress_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   CONSTRAINT [PK_EmployeeAddress_EmployeeID_AddressID] PRIMARY KEY CLUSTERED ([EmployeeID], [AddressID]),
   CONSTRAINT [FK_EmployeeAddress_Address_AddressID] FOREIGN KEY ([addressid]) REFERENCES [Person].[Address] ([addressid]),
   CONSTRAINT [FK_EmployeeAddress_Employee_EmployeeID] FOREIGN KEY ([employeeid]) REFERENCES [HumanResources].[Employee] ([employeeid])
@@ -38,3 +39,21 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Employee.EmployeeID.', 'SCHEMA', N'HumanResources', 'TABLE', N'EmployeeAddress', 'CONSTRAINT', N'FK_EmployeeAddress_Employee_EmployeeID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

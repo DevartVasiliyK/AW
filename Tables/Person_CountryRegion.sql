@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [Person].[CountryRegion] (
+  [added] [int] NULL,
   [CountryRegionCode] [nvarchar](3) NOT NULL,
-  [Name] [dbo].[Name] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_CountryRegion_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
   CONSTRAINT [PK_CountryRegion_CountryRegionCode] PRIMARY KEY CLUSTERED ([CountryRegionCode])
 )
 ON [PRIMARY]
@@ -26,3 +27,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Person', 'TABLE', N'CountryRegion', 'CONSTRAINT', N'DF_CountryRegion_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

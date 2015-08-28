@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [Sales].[SalesReason] (
-  [SalesReasonID] [int] IDENTITY,
+  [added] [int] NULL,
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesReason_ModifiedDate] DEFAULT (getdate()),
   [Name] [dbo].[Name] NOT NULL,
   [ReasonType] [dbo].[Name] NOT NULL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesReason_ModifiedDate] DEFAULT (getdate()),
+  [SalesReasonID] [int] IDENTITY,
   CONSTRAINT [PK_SalesReason_SalesReasonID] PRIMARY KEY CLUSTERED ([SalesReasonID])
 )
 ON [PRIMARY]
@@ -19,3 +20,11 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Sales', 'TABLE', N'SalesReason', 'CONSTRAINT', N'DF_SalesReason_ModifiedDate'
 GO
+
+
+
+
+
+
+
+

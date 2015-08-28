@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [Purchasing].[VendorAddress] (
-  [VendorID] [int] NOT NULL,
+  [added] [int] NULL,
   [AddressID] [int] NOT NULL,
   [AddressTypeID] [int] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_VendorAddress_ModifiedDate] DEFAULT (getdate()),
+  [VendorID] [int] NOT NULL,
   CONSTRAINT [PK_VendorAddress_VendorID_AddressID] PRIMARY KEY CLUSTERED ([VendorID], [AddressID]),
   CONSTRAINT [FK_VendorAddress_Address_AddressID] FOREIGN KEY ([addressid]) REFERENCES [Person].[Address] ([addressid]),
   CONSTRAINT [FK_VendorAddress_AddressType_AddressTypeID] FOREIGN KEY ([addresstypeid]) REFERENCES [Person].[AddressType] ([addresstypeid]),
@@ -39,3 +40,21 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Vendor.VendorID.', 'SCHEMA', N'Purchasing', 'TABLE', N'VendorAddress', 'CONSTRAINT', N'FK_VendorAddress_Vendor_VendorID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

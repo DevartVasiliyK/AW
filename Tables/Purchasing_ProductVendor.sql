@@ -1,15 +1,16 @@
 ﻿CREATE TABLE [Purchasing].[ProductVendor] (
-  [ProductID] [int] NOT NULL,
-  [VendorID] [int] NOT NULL,
+  [added] [int] NULL,
   [AverageLeadTime] [int] NOT NULL,
-  [StandardPrice] [money] NOT NULL,
   [LastReceiptCost] [money] NULL,
   [LastReceiptDate] [datetime] NULL,
-  [MinOrderQty] [int] NOT NULL,
   [MaxOrderQty] [int] NOT NULL,
-  [OnOrderQty] [int] NULL,
-  [UnitMeasureCode] [nchar](3) NOT NULL,
+  [MinOrderQty] [int] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ProductVendor_ModifiedDate] DEFAULT (getdate()),
+  [OnOrderQty] [int] NULL,
+  [ProductID] [int] NOT NULL,
+  [StandardPrice] [money] NOT NULL,
+  [UnitMeasureCode] [nchar](3) NOT NULL,
+  [VendorID] [int] NOT NULL,
   CONSTRAINT [PK_ProductVendor_ProductID_VendorID] PRIMARY KEY CLUSTERED ([ProductID], [VendorID]),
   CONSTRAINT [CK_ProductVendor_AverageLeadTime] CHECK ([AverageLeadTime]>=(1)),
   CONSTRAINT [CK_ProductVendor_LastReceiptCost] CHECK ([LastReceiptCost]>(0.00)),
@@ -78,3 +79,37 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Vendor.VendorID.', 'SCHEMA', N'Purchasing', 'TABLE', N'ProductVendor', 'CONSTRAINT', N'FK_ProductVendor_Vendor_VendorID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

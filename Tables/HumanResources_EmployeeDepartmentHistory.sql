@@ -1,10 +1,11 @@
 ﻿CREATE TABLE [HumanResources].[EmployeeDepartmentHistory] (
-  [EmployeeID] [int] NOT NULL,
+  [added] [int] NULL,
   [DepartmentID] [smallint] NOT NULL,
-  [ShiftID] [tinyint] NOT NULL,
-  [StartDate] [datetime] NOT NULL,
+  [EmployeeID] [int] NOT NULL,
   [EndDate] [datetime] NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_EmployeeDepartmentHistory_ModifiedDate] DEFAULT (getdate()),
+  [ShiftID] [tinyint] NOT NULL,
+  [StartDate] [datetime] NOT NULL,
   CONSTRAINT [PK_EmployeeDepartmentHistory_EmployeeID_StartDate_DepartmentID] PRIMARY KEY CLUSTERED ([EmployeeID], [StartDate], [DepartmentID], [ShiftID]),
   CONSTRAINT [CK_EmployeeDepartmentHistory_EndDate] CHECK ([EndDate]>=[StartDate] OR [EndDate] IS NULL),
   CONSTRAINT [FK_EmployeeDepartmentHistory_Department_DepartmentID] FOREIGN KEY ([departmentid]) REFERENCES [HumanResources].[Department] ([departmentid]),
@@ -53,3 +54,27 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Shift.ShiftID', 'SCHEMA', N'HumanResources', 'TABLE', N'EmployeeDepartmentHistory', 'CONSTRAINT', N'FK_EmployeeDepartmentHistory_Shift_ShiftID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

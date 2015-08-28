@@ -1,11 +1,12 @@
 ﻿CREATE TABLE [Sales].[SalesTaxRate] (
-  [SalesTaxRateID] [int] IDENTITY,
-  [StateProvinceID] [int] NOT NULL,
-  [TaxType] [tinyint] NOT NULL,
-  [TaxRate] [smallmoney] NOT NULL CONSTRAINT [DF_SalesTaxRate_TaxRate] DEFAULT (0.00),
+  [added] [int] NULL,
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesTaxRate_ModifiedDate] DEFAULT (getdate()),
   [Name] [dbo].[Name] NOT NULL,
   [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesTaxRate_rowguid] DEFAULT (newid()) ROWGUIDCOL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesTaxRate_ModifiedDate] DEFAULT (getdate()),
+  [SalesTaxRateID] [int] IDENTITY,
+  [StateProvinceID] [int] NOT NULL,
+  [TaxRate] [smallmoney] NOT NULL CONSTRAINT [DF_SalesTaxRate_TaxRate] DEFAULT (0.00),
+  [TaxType] [tinyint] NOT NULL,
   CONSTRAINT [PK_SalesTaxRate_SalesTaxRateID] PRIMARY KEY CLUSTERED ([SalesTaxRateID]),
   CONSTRAINT [CK_SalesTaxRate_TaxType] CHECK ([TaxType]>=(1) AND [TaxType]<=(3)),
   CONSTRAINT [FK_SalesTaxRate_StateProvince_StateProvinceID] FOREIGN KEY ([stateprovinceid]) REFERENCES [Person].[StateProvince] ([stateprovinceid])
@@ -52,3 +53,27 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing StateProvince.StateProvinceID.', 'SCHEMA', N'Sales', 'TABLE', N'SalesTaxRate', 'CONSTRAINT', N'FK_SalesTaxRate_StateProvince_StateProvinceID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

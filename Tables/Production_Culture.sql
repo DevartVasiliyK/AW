@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [Production].[Culture] (
+  [added] [int] NULL,
   [CultureID] [nchar](6) NOT NULL,
-  [Name] [dbo].[Name] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Culture_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
   CONSTRAINT [PK_Culture_CultureID] PRIMARY KEY CLUSTERED ([CultureID])
 )
 ON [PRIMARY]
@@ -26,3 +27,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Production', 'TABLE', N'Culture', 'CONSTRAINT', N'DF_Culture_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

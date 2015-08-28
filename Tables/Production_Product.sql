@@ -1,29 +1,30 @@
 ﻿CREATE TABLE [Production].[Product] (
-  [ProductID] [int] IDENTITY,
-  [Name] [dbo].[Name] NOT NULL,
-  [ProductNumber] [nvarchar](25) NOT NULL,
-  [MakeFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Product_MakeFlag] DEFAULT (1),
-  [FinishedGoodsFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Product_FinishedGoodsFlag] DEFAULT (1),
+  [added] [int] NULL,
+  [Class] [nchar](2) NULL,
   [Color] [nvarchar](15) NULL,
-  [SafetyStockLevel] [smallint] NOT NULL,
-  [ReorderPoint] [smallint] NOT NULL,
-  [StandardCost] [money] NOT NULL,
+  [DaysToManufacture] [int] NOT NULL,
+  [DiscontinuedDate] [datetime] NULL,
+  [FinishedGoodsFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Product_FinishedGoodsFlag] DEFAULT (1),
   [ListPrice] [money] NOT NULL,
+  [MakeFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Product_MakeFlag] DEFAULT (1),
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Product_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
+  [ProductID] [int] IDENTITY,
+  [ProductLine] [nchar](2) NULL,
+  [ProductModelID] [int] NULL,
+  [ProductNumber] [nvarchar](25) NOT NULL,
+  [ProductSubcategoryID] [int] NULL,
+  [ReorderPoint] [smallint] NOT NULL,
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Product_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [SafetyStockLevel] [smallint] NOT NULL,
+  [SellEndDate] [datetime] NULL,
+  [SellStartDate] [datetime] NOT NULL,
   [Size] [nvarchar](5) NULL,
   [SizeUnitMeasureCode] [nchar](3) NULL,
-  [WeightUnitMeasureCode] [nchar](3) NULL,
-  [Weight] [decimal](8, 2) NULL,
-  [DaysToManufacture] [int] NOT NULL,
-  [ProductLine] [nchar](2) NULL,
-  [Class] [nchar](2) NULL,
+  [StandardCost] [money] NOT NULL,
   [Style] [nchar](2) NULL,
-  [ProductSubcategoryID] [int] NULL,
-  [ProductModelID] [int] NULL,
-  [SellStartDate] [datetime] NOT NULL,
-  [SellEndDate] [datetime] NULL,
-  [DiscontinuedDate] [datetime] NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Product_rowguid] DEFAULT (newid()) ROWGUIDCOL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Product_ModifiedDate] DEFAULT (getdate()),
+  [Weight] [decimal](8, 2) NULL,
+  [WeightUnitMeasureCode] [nchar](3) NULL,
   CONSTRAINT [PK_Product_ProductID] PRIMARY KEY CLUSTERED ([ProductID]),
   CONSTRAINT [CK_Product_Class] CHECK (upper([Class])='H' OR upper([Class])='M' OR upper([Class])='L' OR [Class] IS NULL),
   CONSTRAINT [CK_Product_DaysToManufacture] CHECK ([DaysToManufacture]>=(0)),
@@ -129,3 +130,57 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing UnitMeasure.UnitMeasureCode.', 'SCHEMA', N'Production', 'TABLE', N'Product', 'CONSTRAINT', N'FK_Product_UnitMeasure_WeightUnitMeasureCode'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

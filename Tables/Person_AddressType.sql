@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [Person].[AddressType] (
+  [added] [int] NULL,
   [AddressTypeID] [int] IDENTITY,
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_AddressType_ModifiedDate] DEFAULT (getdate()),
   [Name] [dbo].[Name] NOT NULL,
   [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_AddressType_rowguid] DEFAULT (newid()) ROWGUIDCOL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_AddressType_ModifiedDate] DEFAULT (getdate()),
   CONSTRAINT [PK_AddressType_AddressTypeID] PRIMARY KEY CLUSTERED ([AddressTypeID])
 )
 ON [PRIMARY]
@@ -38,3 +39,21 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of NEWID()', 'SCHEMA', N'Person', 'TABLE', N'AddressType', 'CONSTRAINT', N'DF_AddressType_rowguid'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,14 +1,15 @@
 ﻿CREATE TABLE [Production].[Document] (
-  [DocumentID] [int] IDENTITY,
-  [Title] [nvarchar](50) NOT NULL,
-  [FileName] [nvarchar](400) NOT NULL,
-  [FileExtension] [nvarchar](8) NOT NULL,
-  [Revision] [nchar](5) NOT NULL,
+  [added] [int] NULL,
   [ChangeNumber] [int] NOT NULL CONSTRAINT [DF_Document_ChangeNumber] DEFAULT (0),
-  [Status] [tinyint] NOT NULL,
-  [DocumentSummary] [nvarchar](max) NULL,
   [Document] [varbinary](max) NULL,
+  [DocumentID] [int] IDENTITY,
+  [DocumentSummary] [nvarchar](max) NULL,
+  [FileExtension] [nvarchar](8) NOT NULL,
+  [FileName] [nvarchar](400) NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Document_ModifiedDate] DEFAULT (getdate()),
+  [Revision] [nchar](5) NOT NULL,
+  [Status] [tinyint] NOT NULL,
+  [Title] [nvarchar](50) NOT NULL,
   CONSTRAINT [PK_Document_DocumentID] PRIMARY KEY CLUSTERED ([DocumentID]),
   CONSTRAINT [CK_Document_Status] CHECK ([Status]>=(1) AND [Status]<=(3))
 )
@@ -41,3 +42,19 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Production', 'TABLE', N'Document', 'CONSTRAINT', N'DF_Document_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

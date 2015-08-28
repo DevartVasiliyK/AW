@@ -1,31 +1,32 @@
 ﻿CREATE TABLE [Sales].[SalesOrderHeader] (
-  [SalesOrderID] [int] IDENTITY NOT FOR REPLICATION,
-  [RevisionNumber] [tinyint] NOT NULL CONSTRAINT [DF_SalesOrderHeader_RevisionNumber] DEFAULT (0),
-  [OrderDate] [datetime] NOT NULL CONSTRAINT [DF_SalesOrderHeader_OrderDate] DEFAULT (getdate()),
-  [DueDate] [datetime] NOT NULL,
-  [ShipDate] [datetime] NULL,
-  [Status] [tinyint] NOT NULL CONSTRAINT [DF_SalesOrderHeader_Status] DEFAULT (1),
-  [OnlineOrderFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_SalesOrderHeader_OnlineOrderFlag] DEFAULT (1),
-  [SalesOrderNumber] AS (isnull(N'SO'+CONVERT([nvarchar](23),[SalesOrderID],0),N'*** ERROR ***')),
-  [PurchaseOrderNumber] [dbo].[OrderNumber] NULL,
   [AccountNumber] [dbo].[AccountNumber] NULL,
-  [CustomerID] [int] NOT NULL,
-  [ContactID] [int] NOT NULL,
-  [SalesPersonID] [int] NULL,
-  [TerritoryID] [int] NULL,
+  [added] [int] NULL,
   [BillToAddressID] [int] NOT NULL,
-  [ShipToAddressID] [int] NOT NULL,
-  [ShipMethodID] [int] NOT NULL,
-  [CreditCardID] [int] NULL,
+  [Comment] [nvarchar](128) NULL,
+  [ContactID] [int] NOT NULL,
   [CreditCardApprovalCode] [varchar](15) NULL,
+  [CreditCardID] [int] NULL,
   [CurrencyRateID] [int] NULL,
+  [CustomerID] [int] NOT NULL,
+  [DueDate] [datetime] NOT NULL,
+  [Freight] [money] NOT NULL CONSTRAINT [DF_SalesOrderHeader_Freight] DEFAULT (0.00),
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesOrderHeader_ModifiedDate] DEFAULT (getdate()),
+  [OnlineOrderFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_SalesOrderHeader_OnlineOrderFlag] DEFAULT (1),
+  [OrderDate] [datetime] NOT NULL CONSTRAINT [DF_SalesOrderHeader_OrderDate] DEFAULT (getdate()),
+  [PurchaseOrderNumber] [dbo].[OrderNumber] NULL,
+  [RevisionNumber] [tinyint] NOT NULL CONSTRAINT [DF_SalesOrderHeader_RevisionNumber] DEFAULT (0),
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesOrderHeader_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [SalesOrderID] [int] IDENTITY NOT FOR REPLICATION,
+  [SalesOrderNumber] AS (isnull(N'SO'+CONVERT([nvarchar](23),[SalesOrderID],0),N'*** ERROR ***')),
+  [SalesPersonID] [int] NULL,
+  [ShipDate] [datetime] NULL,
+  [ShipMethodID] [int] NOT NULL,
+  [ShipToAddressID] [int] NOT NULL,
+  [Status] [tinyint] NOT NULL CONSTRAINT [DF_SalesOrderHeader_Status] DEFAULT (1),
   [SubTotal] [money] NOT NULL CONSTRAINT [DF_SalesOrderHeader_SubTotal] DEFAULT (0.00),
   [TaxAmt] [money] NOT NULL CONSTRAINT [DF_SalesOrderHeader_TaxAmt] DEFAULT (0.00),
-  [Freight] [money] NOT NULL CONSTRAINT [DF_SalesOrderHeader_Freight] DEFAULT (0.00),
+  [TerritoryID] [int] NULL,
   [TotalDue] AS (isnull(([SubTotal]+[TaxAmt])+[Freight],(0))),
-  [Comment] [nvarchar](128) NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesOrderHeader_rowguid] DEFAULT (newid()) ROWGUIDCOL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesOrderHeader_ModifiedDate] DEFAULT (getdate()),
   CONSTRAINT [PK_SalesOrderHeader_SalesOrderID] PRIMARY KEY CLUSTERED ([SalesOrderID]),
   CONSTRAINT [CK_SalesOrderHeader_DueDate] CHECK ([DueDate]>=[OrderDate]),
   CONSTRAINT [CK_SalesOrderHeader_Freight] CHECK ([Freight]>=(0.00)),
@@ -220,3 +221,77 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing ShipMethod.ShipMethodID.', 'SCHEMA', N'Sales', 'TABLE', N'SalesOrderHeader', 'CONSTRAINT', N'FK_SalesOrderHeader_ShipMethod_ShipMethodID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

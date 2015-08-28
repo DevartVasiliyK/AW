@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [Production].[UnitMeasure] (
-  [UnitMeasureCode] [nchar](3) NOT NULL,
-  [Name] [dbo].[Name] NOT NULL,
+  [added] [int] NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_UnitMeasure_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
+  [UnitMeasureCode] [nchar](3) NOT NULL,
   CONSTRAINT [PK_UnitMeasure_UnitMeasureCode] PRIMARY KEY CLUSTERED ([UnitMeasureCode])
 )
 ON [PRIMARY]
@@ -26,3 +27,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Production', 'TABLE', N'UnitMeasure', 'CONSTRAINT', N'DF_UnitMeasure_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

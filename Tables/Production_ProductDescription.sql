@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [Production].[ProductDescription] (
-  [ProductDescriptionID] [int] IDENTITY,
+  [added] [int] NULL,
   [Description] [nvarchar](400) NOT NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_ProductDescription_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ProductDescription_ModifiedDate] DEFAULT (getdate()),
+  [ProductDescriptionID] [int] IDENTITY,
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_ProductDescription_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   CONSTRAINT [PK_ProductDescription_ProductDescriptionID] PRIMARY KEY CLUSTERED ([ProductDescriptionID])
 )
 ON [PRIMARY]
@@ -30,3 +31,17 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of NEWID()', 'SCHEMA', N'Production', 'TABLE', N'ProductDescription', 'CONSTRAINT', N'DF_ProductDescription_rowguid'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+

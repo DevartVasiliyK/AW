@@ -1,10 +1,11 @@
 ﻿CREATE TABLE [Sales].[Store] (
+  [added] [int] NULL,
   [CustomerID] [int] NOT NULL,
-  [Name] [dbo].[Name] NOT NULL,
-  [SalesPersonID] [int] NULL,
   [Demographics] [xml] (CONTENT Sales.StoreSurveySchemaCollection) NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Store_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Store_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Store_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [SalesPersonID] [int] NULL,
   CONSTRAINT [PK_Store_CustomerID] PRIMARY KEY CLUSTERED ([CustomerID]),
   CONSTRAINT [FK_Store_Customer_CustomerID] FOREIGN KEY ([customerid]) REFERENCES [Sales].[Customer] ([customerid]),
   CONSTRAINT [FK_Store_SalesPerson_SalesPersonID] FOREIGN KEY ([salespersonid]) REFERENCES [Sales].[SalesPerson] ([salespersonid])
@@ -94,3 +95,33 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing SalesPerson.SalesPersonID', 'SCHEMA', N'Sales', 'TABLE', N'Store', 'CONSTRAINT', N'FK_Store_SalesPerson_SalesPersonID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

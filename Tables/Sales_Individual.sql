@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [Sales].[Individual] (
-  [CustomerID] [int] NOT NULL,
+  [added] [int] NULL,
   [ContactID] [int] NOT NULL,
+  [CustomerID] [int] NOT NULL,
   [Demographics] [xml] (CONTENT Sales.IndividualSurveySchemaCollection) NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Individual_ModifiedDate] DEFAULT (getdate()),
   CONSTRAINT [PK_Individual_CustomerID] PRIMARY KEY CLUSTERED ([CustomerID]),
@@ -118,3 +119,35 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Customer.CustomerID.', 'SCHEMA', N'Sales', 'TABLE', N'Individual', 'CONSTRAINT', N'FK_Individual_Customer_CustomerID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

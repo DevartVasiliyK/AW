@@ -1,16 +1,17 @@
 ﻿CREATE TABLE [Production].[WorkOrderRouting] (
-  [WorkOrderID] [int] NOT NULL,
-  [ProductID] [int] NOT NULL,
-  [OperationSequence] [smallint] NOT NULL,
-  [LocationID] [smallint] NOT NULL,
-  [ScheduledStartDate] [datetime] NOT NULL,
-  [ScheduledEndDate] [datetime] NOT NULL,
-  [ActualStartDate] [datetime] NULL,
+  [ActualCost] [money] NULL,
   [ActualEndDate] [datetime] NULL,
   [ActualResourceHrs] [decimal](9, 4) NULL,
-  [PlannedCost] [money] NOT NULL,
-  [ActualCost] [money] NULL,
+  [ActualStartDate] [datetime] NULL,
+  [added] [int] NULL,
+  [LocationID] [smallint] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_WorkOrderRouting_ModifiedDate] DEFAULT (getdate()),
+  [OperationSequence] [smallint] NOT NULL,
+  [PlannedCost] [money] NOT NULL,
+  [ProductID] [int] NOT NULL,
+  [ScheduledEndDate] [datetime] NOT NULL,
+  [ScheduledStartDate] [datetime] NOT NULL,
+  [WorkOrderID] [int] NOT NULL,
   CONSTRAINT [PK_WorkOrderRouting_WorkOrderID_ProductID_OperationSequence] PRIMARY KEY CLUSTERED ([WorkOrderID], [ProductID], [OperationSequence]),
   CONSTRAINT [CK_WorkOrderRouting_ActualCost] CHECK ([ActualCost]>(0.00)),
   CONSTRAINT [CK_WorkOrderRouting_ActualEndDate] CHECK ([ActualEndDate]>=[ActualStartDate] OR [ActualEndDate] IS NULL OR [ActualStartDate] IS NULL),
@@ -63,3 +64,29 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing WorkOrder.WorkOrderID.', 'SCHEMA', N'Production', 'TABLE', N'WorkOrderRouting', 'CONSTRAINT', N'FK_WorkOrderRouting_WorkOrder_WorkOrderID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [Production].[Location] (
-  [LocationID] [smallint] IDENTITY,
-  [Name] [dbo].[Name] NOT NULL,
-  [CostRate] [smallmoney] NOT NULL CONSTRAINT [DF_Location_CostRate] DEFAULT (0.00),
+  [added] [int] NULL,
   [Availability] [decimal](8, 2) NOT NULL CONSTRAINT [DF_Location_Availability] DEFAULT (0.00),
+  [CostRate] [smallmoney] NOT NULL CONSTRAINT [DF_Location_CostRate] DEFAULT (0.00),
+  [LocationID] [smallint] IDENTITY,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Location_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
   CONSTRAINT [PK_Location_LocationID] PRIMARY KEY CLUSTERED ([LocationID]),
   CONSTRAINT [CK_Location_Availability] CHECK ([Availability]>=(0.00)),
   CONSTRAINT [CK_Location_CostRate] CHECK ([CostRate]>=(0.00))
@@ -42,3 +43,23 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Production', 'TABLE', N'Location', 'CONSTRAINT', N'DF_Location_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

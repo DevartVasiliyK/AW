@@ -1,4 +1,5 @@
 ﻿CREATE TABLE [Sales].[ContactCreditCard] (
+  [added] [int] NULL,
   [ContactID] [int] NOT NULL,
   [CreditCardID] [int] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ContactCreditCard_ModifiedDate] DEFAULT (getdate()),
@@ -26,3 +27,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing CreditCard.CreditCardID.', 'SCHEMA', N'Sales', 'TABLE', N'ContactCreditCard', 'CONSTRAINT', N'FK_ContactCreditCard_CreditCard_CreditCardID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

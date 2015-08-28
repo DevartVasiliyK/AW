@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [Production].[Illustration] (
-  [IllustrationID] [int] IDENTITY,
+  [added] [int] NULL,
   [Diagram] [xml] NULL,
+  [IllustrationID] [int] IDENTITY,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Illustration_ModifiedDate] DEFAULT (getdate()),
   CONSTRAINT [PK_Illustration_IllustrationID] PRIMARY KEY CLUSTERED ([IllustrationID])
 )
@@ -19,3 +20,11 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Production', 'TABLE', N'Illustration', 'CONSTRAINT', N'DF_Illustration_ModifiedDate'
 GO
+
+
+
+
+
+
+
+

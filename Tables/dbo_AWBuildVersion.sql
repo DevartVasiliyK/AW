@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [dbo].[AWBuildVersion] (
-  [SystemInformationID] [tinyint] IDENTITY,
+  [added] [int] NULL,
   [Database Version] [nvarchar](25) NOT NULL,
-  [VersionDate] [datetime] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_AWBuildVersion_ModifiedDate] DEFAULT (getdate()),
+  [SystemInformationID] [tinyint] IDENTITY,
+  [VersionDate] [datetime] NOT NULL,
   CONSTRAINT [PK_AWBuildVersion_SystemInformationID] PRIMARY KEY CLUSTERED ([SystemInformationID])
 )
 ON [PRIMARY]
@@ -19,3 +20,11 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'dbo', 'TABLE', N'AWBuildVersion', 'CONSTRAINT', N'DF_AWBuildVersion_ModifiedDate'
 GO
+
+
+
+
+
+
+
+

@@ -1,12 +1,13 @@
 ﻿CREATE TABLE [Production].[ProductReview] (
-  [ProductReviewID] [int] IDENTITY,
-  [ProductID] [int] NOT NULL,
-  [ReviewerName] [dbo].[Name] NOT NULL,
-  [ReviewDate] [datetime] NOT NULL CONSTRAINT [DF_ProductReview_ReviewDate] DEFAULT (getdate()),
-  [EmailAddress] [nvarchar](50) NOT NULL,
-  [Rating] [int] NOT NULL,
+  [added] [int] NULL,
   [Comments] [nvarchar](3850) NULL,
+  [EmailAddress] [nvarchar](50) NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ProductReview_ModifiedDate] DEFAULT (getdate()),
+  [ProductID] [int] NOT NULL,
+  [ProductReviewID] [int] IDENTITY,
+  [Rating] [int] NOT NULL,
+  [ReviewDate] [datetime] NOT NULL CONSTRAINT [DF_ProductReview_ReviewDate] DEFAULT (getdate()),
+  [ReviewerName] [dbo].[Name] NOT NULL,
   CONSTRAINT [PK_ProductReview_ProductReviewID] PRIMARY KEY CLUSTERED ([ProductReviewID]),
   CONSTRAINT [CK_ProductReview_Rating] CHECK ([Rating]>=(1) AND [Rating]<=(5)),
   CONSTRAINT [FK_ProductReview_Product_ProductID] FOREIGN KEY ([productid]) REFERENCES [Production].[Product] ([productid])
@@ -43,3 +44,21 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Product.ProductID.', 'SCHEMA', N'Production', 'TABLE', N'ProductReview', 'CONSTRAINT', N'FK_ProductReview_Product_ProductID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

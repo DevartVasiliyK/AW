@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [Production].[ProductDocument] (
-  [ProductID] [int] NOT NULL,
+  [added] [int] NULL,
   [DocumentID] [int] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ProductDocument_ModifiedDate] DEFAULT (getdate()),
+  [ProductID] [int] NOT NULL,
   CONSTRAINT [PK_ProductDocument_ProductID_DocumentID] PRIMARY KEY CLUSTERED ([ProductID], [DocumentID]),
   CONSTRAINT [FK_ProductDocument_Document_DocumentID] FOREIGN KEY ([documentid]) REFERENCES [Production].[Document] ([documentid]),
   CONSTRAINT [FK_ProductDocument_Product_ProductID] FOREIGN KEY ([productid]) REFERENCES [Production].[Product] ([productid])
@@ -26,3 +27,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Product.ProductID.', 'SCHEMA', N'Production', 'TABLE', N'ProductDocument', 'CONSTRAINT', N'FK_ProductDocument_Product_ProductID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

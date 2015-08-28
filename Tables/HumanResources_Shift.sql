@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [HumanResources].[Shift] (
-  [ShiftID] [tinyint] IDENTITY,
-  [Name] [dbo].[Name] NOT NULL,
-  [StartTime] [datetime] NOT NULL,
+  [added] [int] NULL,
   [EndTime] [datetime] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Shift_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
+  [ShiftID] [tinyint] IDENTITY,
+  [StartTime] [datetime] NOT NULL,
   CONSTRAINT [PK_Shift_ShiftID] PRIMARY KEY CLUSTERED ([ShiftID])
 )
 ON [PRIMARY]
@@ -36,3 +37,19 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'HumanResources', 'TABLE', N'Shift', 'CONSTRAINT', N'DF_Shift_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

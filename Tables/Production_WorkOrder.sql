@@ -1,14 +1,15 @@
 ﻿CREATE TABLE [Production].[WorkOrder] (
-  [WorkOrderID] [int] IDENTITY,
-  [ProductID] [int] NOT NULL,
-  [OrderQty] [int] NOT NULL,
-  [StockedQty] AS (isnull([OrderQty]-[ScrappedQty],(0))),
-  [ScrappedQty] [smallint] NOT NULL,
-  [StartDate] [datetime] NOT NULL,
-  [EndDate] [datetime] NULL,
+  [added] [int] NULL,
   [DueDate] [datetime] NOT NULL,
-  [ScrapReasonID] [smallint] NULL,
+  [EndDate] [datetime] NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_WorkOrder_ModifiedDate] DEFAULT (getdate()),
+  [OrderQty] [int] NOT NULL,
+  [ProductID] [int] NOT NULL,
+  [ScrappedQty] [smallint] NOT NULL,
+  [ScrapReasonID] [smallint] NULL,
+  [StartDate] [datetime] NOT NULL,
+  [StockedQty] AS (isnull([OrderQty]-[ScrappedQty],(0))),
+  [WorkOrderID] [int] IDENTITY,
   CONSTRAINT [PK_WorkOrder_WorkOrderID] PRIMARY KEY CLUSTERED ([WorkOrderID]),
   CONSTRAINT [CK_WorkOrder_EndDate] CHECK ([EndDate]>=[StartDate] OR [EndDate] IS NULL),
   CONSTRAINT [CK_WorkOrder_OrderQty] CHECK ([OrderQty]>(0)),
@@ -146,3 +147,37 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing ScrapReason.ScrapReasonID.', 'SCHEMA', N'Production', 'TABLE', N'WorkOrder', 'CONSTRAINT', N'FK_WorkOrder_ScrapReason_ScrapReasonID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

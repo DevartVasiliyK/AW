@@ -1,12 +1,13 @@
 ﻿CREATE TABLE [Purchasing].[Vendor] (
-  [VendorID] [int] IDENTITY,
   [AccountNumber] [dbo].[AccountNumber] NOT NULL,
-  [Name] [dbo].[Name] NOT NULL,
-  [CreditRating] [tinyint] NOT NULL,
-  [PreferredVendorStatus] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Vendor_PreferredVendorStatus] DEFAULT (1),
   [ActiveFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Vendor_ActiveFlag] DEFAULT (1),
-  [PurchasingWebServiceURL] [nvarchar](1024) NULL,
+  [added] [int] NULL,
+  [CreditRating] [tinyint] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Vendor_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
+  [PreferredVendorStatus] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Vendor_PreferredVendorStatus] DEFAULT (1),
+  [PurchasingWebServiceURL] [nvarchar](1024) NULL,
+  [VendorID] [int] IDENTITY,
   CONSTRAINT [PK_Vendor_VendorID] PRIMARY KEY CLUSTERED ([VendorID]),
   CONSTRAINT [CK_Vendor_CreditRating] CHECK ([CreditRating]>=(1) AND [CreditRating]<=(5))
 )
@@ -81,3 +82,25 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of 1 (TRUE)', 'SCHEMA', N'Purchasing', 'TABLE', N'Vendor', 'CONSTRAINT', N'DF_Vendor_PreferredVendorStatus'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

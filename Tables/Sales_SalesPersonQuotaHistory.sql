@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [Sales].[SalesPersonQuotaHistory] (
-  [SalesPersonID] [int] NOT NULL,
-  [QuotaDate] [datetime] NOT NULL,
-  [SalesQuota] [money] NOT NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesPersonQuotaHistory_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [added] [int] NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesPersonQuotaHistory_ModifiedDate] DEFAULT (getdate()),
+  [QuotaDate] [datetime] NOT NULL,
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesPersonQuotaHistory_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [SalesPersonID] [int] NOT NULL,
+  [SalesQuota] [money] NOT NULL,
   CONSTRAINT [PK_SalesPersonQuotaHistory_SalesPersonID_QuotaDate] PRIMARY KEY CLUSTERED ([SalesPersonID], [QuotaDate]),
   CONSTRAINT [CK_SalesPersonQuotaHistory_SalesQuota] CHECK ([SalesQuota]>(0.00)),
   CONSTRAINT [FK_SalesPersonQuotaHistory_SalesPerson_SalesPersonID] FOREIGN KEY ([salespersonid]) REFERENCES [Sales].[SalesPerson] ([salespersonid])
@@ -39,3 +40,21 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing SalesPerson.SalesPersonID.', 'SCHEMA', N'Sales', 'TABLE', N'SalesPersonQuotaHistory', 'CONSTRAINT', N'FK_SalesPersonQuotaHistory_SalesPerson_SalesPersonID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

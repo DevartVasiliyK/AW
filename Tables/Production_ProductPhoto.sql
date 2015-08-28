@@ -1,10 +1,11 @@
 ﻿CREATE TABLE [Production].[ProductPhoto] (
-  [ProductPhotoID] [int] IDENTITY,
-  [ThumbNailPhoto] [varbinary](max) NULL,
-  [ThumbnailPhotoFileName] [nvarchar](50) NULL,
+  [added] [int] NULL,
   [LargePhoto] [varbinary](max) NULL,
   [LargePhotoFileName] [nvarchar](50) NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ProductPhoto_ModifiedDate] DEFAULT (getdate()),
+  [ProductPhotoID] [int] IDENTITY,
+  [ThumbNailPhoto] [varbinary](max) NULL,
+  [ThumbnailPhotoFileName] [nvarchar](50) NULL,
   CONSTRAINT [PK_ProductPhoto_ProductPhotoID] PRIMARY KEY CLUSTERED ([ProductPhotoID])
 )
 ON [PRIMARY]
@@ -22,3 +23,11 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Production', 'TABLE', N'ProductPhoto', 'CONSTRAINT', N'DF_ProductPhoto_ModifiedDate'
 GO
+
+
+
+
+
+
+
+

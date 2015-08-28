@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [HumanResources].[JobCandidate] (
-  [JobCandidateID] [int] IDENTITY,
+  [added] [int] NULL,
   [EmployeeID] [int] NULL,
-  [Resume] [xml] (CONTENT HumanResources.HRResumeSchemaCollection) NULL,
+  [JobCandidateID] [int] IDENTITY,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_JobCandidate_ModifiedDate] DEFAULT (getdate()),
+  [Resume] [xml] (CONTENT HumanResources.HRResumeSchemaCollection) NULL,
   CONSTRAINT [PK_JobCandidate_JobCandidateID] PRIMARY KEY CLUSTERED ([JobCandidateID]),
   CONSTRAINT [FK_JobCandidate_Employee_EmployeeID] FOREIGN KEY ([employeeid]) REFERENCES [HumanResources].[Employee] ([employeeid])
 )
@@ -32,3 +33,17 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Employee.EmployeeID.', 'SCHEMA', N'HumanResources', 'TABLE', N'JobCandidate', 'CONSTRAINT', N'FK_JobCandidate_Employee_EmployeeID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+

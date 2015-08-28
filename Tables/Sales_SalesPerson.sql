@@ -1,13 +1,14 @@
 ﻿CREATE TABLE [Sales].[SalesPerson] (
-  [SalesPersonID] [int] NOT NULL,
-  [TerritoryID] [int] NULL,
-  [SalesQuota] [money] NULL,
+  [added] [int] NULL,
   [Bonus] [money] NOT NULL CONSTRAINT [DF_SalesPerson_Bonus] DEFAULT (0.00),
   [CommissionPct] [smallmoney] NOT NULL CONSTRAINT [DF_SalesPerson_CommissionPct] DEFAULT (0.00),
-  [SalesYTD] [money] NOT NULL CONSTRAINT [DF_SalesPerson_SalesYTD] DEFAULT (0.00),
-  [SalesLastYear] [money] NOT NULL CONSTRAINT [DF_SalesPerson_SalesLastYear] DEFAULT (0.00),
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesPerson_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesPerson_ModifiedDate] DEFAULT (getdate()),
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesPerson_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [SalesLastYear] [money] NOT NULL CONSTRAINT [DF_SalesPerson_SalesLastYear] DEFAULT (0.00),
+  [SalesPersonID] [int] NOT NULL,
+  [SalesQuota] [money] NULL,
+  [SalesYTD] [money] NOT NULL CONSTRAINT [DF_SalesPerson_SalesYTD] DEFAULT (0.00),
+  [TerritoryID] [int] NULL,
   CONSTRAINT [PK_SalesPerson_SalesPersonID] PRIMARY KEY CLUSTERED ([SalesPersonID]),
   CONSTRAINT [CK_SalesPerson_Bonus] CHECK ([Bonus]>=(0.00)),
   CONSTRAINT [CK_SalesPerson_CommissionPct] CHECK ([CommissionPct]>=(0.00)),
@@ -75,3 +76,39 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing SalesTerritory.TerritoryID.', 'SCHEMA', N'Sales', 'TABLE', N'SalesPerson', 'CONSTRAINT', N'FK_SalesPerson_SalesTerritory_TerritoryID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

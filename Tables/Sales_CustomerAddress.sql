@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [Sales].[CustomerAddress] (
-  [CustomerID] [int] NOT NULL,
+  [added] [int] NULL,
   [AddressID] [int] NOT NULL,
   [AddressTypeID] [int] NOT NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_CustomerAddress_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [CustomerID] [int] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_CustomerAddress_ModifiedDate] DEFAULT (getdate()),
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_CustomerAddress_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   CONSTRAINT [PK_CustomerAddress_CustomerID_AddressID] PRIMARY KEY CLUSTERED ([CustomerID], [AddressID]),
   CONSTRAINT [FK_CustomerAddress_Address_AddressID] FOREIGN KEY ([addressid]) REFERENCES [Person].[Address] ([addressid]),
   CONSTRAINT [FK_CustomerAddress_AddressType_AddressTypeID] FOREIGN KEY ([addresstypeid]) REFERENCES [Person].[AddressType] ([addresstypeid]),
@@ -43,3 +44,23 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Customer.CustomerID.', 'SCHEMA', N'Sales', 'TABLE', N'CustomerAddress', 'CONSTRAINT', N'FK_CustomerAddress_Customer_CustomerID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,10 +1,11 @@
 ﻿CREATE TABLE [Sales].[SalesTerritoryHistory] (
-  [SalesPersonID] [int] NOT NULL,
-  [TerritoryID] [int] NOT NULL,
-  [StartDate] [datetime] NOT NULL,
+  [added] [int] NULL,
   [EndDate] [datetime] NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesTerritoryHistory_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesTerritoryHistory_ModifiedDate] DEFAULT (getdate()),
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_SalesTerritoryHistory_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [SalesPersonID] [int] NOT NULL,
+  [StartDate] [datetime] NOT NULL,
+  [TerritoryID] [int] NOT NULL,
   CONSTRAINT [PK_SalesTerritoryHistory_SalesPersonID_StartDate_TerritoryID] PRIMARY KEY CLUSTERED ([SalesPersonID], [StartDate], [TerritoryID]),
   CONSTRAINT [CK_SalesTerritoryHistory_EndDate] CHECK ([EndDate]>=[StartDate] OR [EndDate] IS NULL),
   CONSTRAINT [FK_SalesTerritoryHistory_SalesPerson_SalesPersonID] FOREIGN KEY ([salespersonid]) REFERENCES [Sales].[SalesPerson] ([salespersonid]),
@@ -44,3 +45,23 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing SalesTerritory.TerritoryID.', 'SCHEMA', N'Sales', 'TABLE', N'SalesTerritoryHistory', 'CONSTRAINT', N'FK_SalesTerritoryHistory_SalesTerritory_TerritoryID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,12 +1,13 @@
 ﻿CREATE TABLE [Person].[StateProvince] (
-  [StateProvinceID] [int] IDENTITY,
-  [StateProvinceCode] [nchar](3) NOT NULL,
+  [added] [int] NULL,
   [CountryRegionCode] [nvarchar](3) NOT NULL,
   [IsOnlyStateProvinceFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_StateProvince_IsOnlyStateProvinceFlag] DEFAULT (1),
-  [Name] [dbo].[Name] NOT NULL,
-  [TerritoryID] [int] NOT NULL,
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_StateProvince_rowguid] DEFAULT (newid()) ROWGUIDCOL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_StateProvince_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_StateProvince_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [StateProvinceCode] [nchar](3) NOT NULL,
+  [StateProvinceID] [int] IDENTITY,
+  [TerritoryID] [int] NOT NULL,
   CONSTRAINT [PK_StateProvince_StateProvinceID] PRIMARY KEY CLUSTERED ([StateProvinceID]),
   CONSTRAINT [FK_StateProvince_CountryRegion_CountryRegionCode] FOREIGN KEY ([countryregioncode]) REFERENCES [Person].[CountryRegion] ([countryregioncode]),
   CONSTRAINT [FK_StateProvince_SalesTerritory_TerritoryID] FOREIGN KEY ([territoryid]) REFERENCES [Sales].[SalesTerritory] ([territoryid])
@@ -61,3 +62,31 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing SalesTerritory.TerritoryID.', 'SCHEMA', N'Person', 'TABLE', N'StateProvince', 'CONSTRAINT', N'FK_StateProvince_SalesTerritory_TerritoryID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

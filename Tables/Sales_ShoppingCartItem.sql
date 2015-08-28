@@ -1,10 +1,11 @@
 ﻿CREATE TABLE [Sales].[ShoppingCartItem] (
-  [ShoppingCartItemID] [int] IDENTITY,
-  [ShoppingCartID] [nvarchar](50) NOT NULL,
-  [Quantity] [int] NOT NULL CONSTRAINT [DF_ShoppingCartItem_Quantity] DEFAULT (1),
-  [ProductID] [int] NOT NULL,
+  [added] [int] NULL,
   [DateCreated] [datetime] NOT NULL CONSTRAINT [DF_ShoppingCartItem_DateCreated] DEFAULT (getdate()),
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ShoppingCartItem_ModifiedDate] DEFAULT (getdate()),
+  [ProductID] [int] NOT NULL,
+  [Quantity] [int] NOT NULL CONSTRAINT [DF_ShoppingCartItem_Quantity] DEFAULT (1),
+  [ShoppingCartID] [nvarchar](50) NOT NULL,
+  [ShoppingCartItemID] [int] IDENTITY,
   CONSTRAINT [PK_ShoppingCartItem_ShoppingCartItemID] PRIMARY KEY CLUSTERED ([ShoppingCartItemID]),
   CONSTRAINT [CK_ShoppingCartItem_Quantity] CHECK ([Quantity]>=(1)),
   CONSTRAINT [FK_ShoppingCartItem_Product_ProductID] FOREIGN KEY ([productid]) REFERENCES [Production].[Product] ([productid])
@@ -43,3 +44,23 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Product.ProductID.', 'SCHEMA', N'Sales', 'TABLE', N'ShoppingCartItem', 'CONSTRAINT', N'FK_ShoppingCartItem_Product_ProductID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

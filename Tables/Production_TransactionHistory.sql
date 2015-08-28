@@ -1,13 +1,14 @@
 ﻿CREATE TABLE [Production].[TransactionHistory] (
-  [TransactionID] [int] IDENTITY (100000, 1),
+  [ActualCost] [money] NOT NULL,
+  [added] [int] NULL,
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_TransactionHistory_ModifiedDate] DEFAULT (getdate()),
   [ProductID] [int] NOT NULL,
+  [Quantity] [int] NOT NULL,
   [ReferenceOrderID] [int] NOT NULL,
   [ReferenceOrderLineID] [int] NOT NULL CONSTRAINT [DF_TransactionHistory_ReferenceOrderLineID] DEFAULT (0),
   [TransactionDate] [datetime] NOT NULL CONSTRAINT [DF_TransactionHistory_TransactionDate] DEFAULT (getdate()),
+  [TransactionID] [int] IDENTITY (100000, 1),
   [TransactionType] [nchar](1) NOT NULL,
-  [Quantity] [int] NOT NULL,
-  [ActualCost] [money] NOT NULL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_TransactionHistory_ModifiedDate] DEFAULT (getdate()),
   CONSTRAINT [PK_TransactionHistory_TransactionID] PRIMARY KEY CLUSTERED ([TransactionID]),
   CONSTRAINT [CK_TransactionHistory_TransactionType] CHECK (upper([TransactionType])='P' OR upper([TransactionType])='S' OR upper([TransactionType])='W'),
   CONSTRAINT [FK_TransactionHistory_Product_ProductID] FOREIGN KEY ([productid]) REFERENCES [Production].[Product] ([productid])
@@ -54,3 +55,27 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Product.ProductID.', 'SCHEMA', N'Production', 'TABLE', N'TransactionHistory', 'CONSTRAINT', N'FK_TransactionHistory_Product_ProductID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

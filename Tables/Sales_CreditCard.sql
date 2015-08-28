@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [Sales].[CreditCard] (
-  [CreditCardID] [int] IDENTITY,
-  [CardType] [nvarchar](50) NOT NULL,
+  [added] [int] NULL,
   [CardNumber] [nvarchar](25) NOT NULL,
+  [CardType] [nvarchar](50) NOT NULL,
+  [CreditCardID] [int] IDENTITY,
   [ExpMonth] [tinyint] NOT NULL,
   [ExpYear] [smallint] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_CreditCard_ModifiedDate] DEFAULT (getdate()),
@@ -29,3 +30,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Sales', 'TABLE', N'CreditCard', 'CONSTRAINT', N'DF_CreditCard_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [Sales].[SalesOrderHeaderSalesReason] (
+  [added] [int] NULL,
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesOrderHeaderSalesReason_ModifiedDate] DEFAULT (getdate()),
   [SalesOrderID] [int] NOT NULL,
   [SalesReasonID] [int] NOT NULL,
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_SalesOrderHeaderSalesReason_ModifiedDate] DEFAULT (getdate()),
   CONSTRAINT [PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID] PRIMARY KEY CLUSTERED ([SalesOrderID], [SalesReasonID]),
   CONSTRAINT [FK_SalesOrderHeaderSalesReason_SalesOrderHeader_SalesOrderID] FOREIGN KEY ([salesorderid]) REFERENCES [Sales].[SalesOrderHeader] ([salesorderid]) ON DELETE CASCADE,
   CONSTRAINT [FK_SalesOrderHeaderSalesReason_SalesReason_SalesReasonID] FOREIGN KEY ([salesreasonid]) REFERENCES [Sales].[SalesReason] ([salesreasonid])
@@ -26,3 +27,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing SalesReason.SalesReasonID.', 'SCHEMA', N'Sales', 'TABLE', N'SalesOrderHeaderSalesReason', 'CONSTRAINT', N'FK_SalesOrderHeaderSalesReason_SalesReason_SalesReasonID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [Production].[ScrapReason] (
-  [ScrapReasonID] [smallint] IDENTITY,
-  [Name] [dbo].[Name] NOT NULL,
+  [added] [int] NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ScrapReason_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
+  [ScrapReasonID] [smallint] IDENTITY,
   CONSTRAINT [PK_ScrapReason_ScrapReasonID] PRIMARY KEY CLUSTERED ([ScrapReasonID])
 )
 ON [PRIMARY]
@@ -26,3 +27,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'Production', 'TABLE', N'ScrapReason', 'CONSTRAINT', N'DF_ScrapReason_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

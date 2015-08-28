@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [Production].[ProductModelProductDescriptionCulture] (
-  [ProductModelID] [int] NOT NULL,
-  [ProductDescriptionID] [int] NOT NULL,
+  [added] [int] NULL,
   [CultureID] [nchar](6) NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_ProductModelProductDescriptionCulture_ModifiedDate] DEFAULT (getdate()),
+  [ProductDescriptionID] [int] NOT NULL,
+  [ProductModelID] [int] NOT NULL,
   CONSTRAINT [PK_ProductModelProductDescriptionCulture_ProductModelID_ProductDescriptionID_CultureID] PRIMARY KEY CLUSTERED ([ProductModelID], [ProductDescriptionID], [CultureID]),
   CONSTRAINT [FK_ProductModelProductDescriptionCulture_Culture_CultureID] FOREIGN KEY ([cultureid]) REFERENCES [Production].[Culture] ([cultureid]),
   CONSTRAINT [FK_ProductModelProductDescriptionCulture_ProductDescription_ProductDescriptionID] FOREIGN KEY ([productdescriptionid]) REFERENCES [Production].[ProductDescription] ([productdescriptionid]),
@@ -31,3 +32,17 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing ProductModel.ProductModelID.', 'SCHEMA', N'Production', 'TABLE', N'ProductModelProductDescriptionCulture', 'CONSTRAINT', N'FK_ProductModelProductDescriptionCulture_ProductModel_ProductModelID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+

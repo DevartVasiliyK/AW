@@ -1,20 +1,21 @@
 ﻿CREATE TABLE [HumanResources].[Employee] (
-  [EmployeeID] [int] IDENTITY,
-  [NationalIDNumber] [nvarchar](15) NOT NULL,
-  [ContactID] [int] NOT NULL,
-  [LoginID] [nvarchar](256) NOT NULL,
-  [ManagerID] [int] NULL,
-  [Title] [nvarchar](50) NOT NULL,
+  [added] [int] NULL,
   [BirthDate] [datetime] NOT NULL,
-  [MaritalStatus] [nchar](1) NOT NULL,
+  [ContactID] [int] NOT NULL,
+  [CurrentFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Employee_CurrentFlag] DEFAULT (1),
+  [EmployeeID] [int] IDENTITY,
   [Gender] [nchar](1) NOT NULL,
   [HireDate] [datetime] NOT NULL,
-  [SalariedFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Employee_SalariedFlag] DEFAULT (1),
-  [VacationHours] [smallint] NOT NULL CONSTRAINT [DF_Employee_VacationHours] DEFAULT (0),
-  [SickLeaveHours] [smallint] NOT NULL CONSTRAINT [DF_Employee_SickLeaveHours] DEFAULT (0),
-  [CurrentFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Employee_CurrentFlag] DEFAULT (1),
-  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Employee_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [LoginID] [nvarchar](256) NOT NULL,
+  [ManagerID] [int] NULL,
+  [MaritalStatus] [nchar](1) NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Employee_ModifiedDate] DEFAULT (getdate()),
+  [NationalIDNumber] [nvarchar](15) NOT NULL,
+  [rowguid] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Employee_rowguid] DEFAULT (newid()) ROWGUIDCOL,
+  [SalariedFlag] [dbo].[Flag] NOT NULL CONSTRAINT [DF_Employee_SalariedFlag] DEFAULT (1),
+  [SickLeaveHours] [smallint] NOT NULL CONSTRAINT [DF_Employee_SickLeaveHours] DEFAULT (0),
+  [Title] [nvarchar](50) NOT NULL,
+  [VacationHours] [smallint] NOT NULL CONSTRAINT [DF_Employee_VacationHours] DEFAULT (0),
   CONSTRAINT [PK_Employee_EmployeeID] PRIMARY KEY CLUSTERED ([EmployeeID]),
   CONSTRAINT [CK_Employee_BirthDate] CHECK ([BirthDate]>='1930-01-01' AND [BirthDate]<=dateadd(year,(-18),getdate())),
   CONSTRAINT [CK_Employee_HireDate] CHECK ([HireDate]>='1996-07-01' AND [HireDate]<=dateadd(day,(1),getdate())),
@@ -161,3 +162,81 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Employee.ManagerID.', 'SCHEMA', N'HumanResources', 'TABLE', N'Employee', 'CONSTRAINT', N'FK_Employee_Employee_ManagerID'
 GO
+
+ALTER TABLE [HumanResources].[Employee] WITH NOCHECK
+  ADD 
+
+ALTER TABLE [HumanResources].[Employee]
+  NOCHECK CONSTRAINT [CK_Employee_Gender]
+GO
+
+ALTER TABLE [HumanResources].[Employee] WITH NOCHECK
+  ADD 
+
+ALTER TABLE [HumanResources].[Employee]
+  CHECK CONSTRAINT [CK_Employee_MaritalStatus]
+GO
+
+ALTER TABLE [HumanResources].[Employee] WITH NOCHECK
+  ADD 
+
+ALTER TABLE [HumanResources].[Employee]
+  CHECK CONSTRAINT [CK_Employee_VacationHours]
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DISABLE TRIGGER [HumanResources].[dEmployee] ON [HumanResources].Employee
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

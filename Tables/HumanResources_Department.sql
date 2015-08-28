@@ -1,8 +1,9 @@
 ﻿CREATE TABLE [HumanResources].[Department] (
+  [added] [int] NULL,
   [DepartmentID] [smallint] IDENTITY,
-  [Name] [dbo].[Name] NOT NULL,
   [GroupName] [dbo].[Name] NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_Department_ModifiedDate] DEFAULT (getdate()),
+  [Name] [dbo].[Name] NOT NULL,
   CONSTRAINT [PK_Department_DepartmentID] PRIMARY KEY CLUSTERED ([DepartmentID])
 )
 ON [PRIMARY]
@@ -27,3 +28,15 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Default constraint value of GETDATE()', 'SCHEMA', N'HumanResources', 'TABLE', N'Department', 'CONSTRAINT', N'DF_Department_ModifiedDate'
 GO
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,15 +1,16 @@
 ﻿CREATE TABLE [Purchasing].[PurchaseOrderDetail] (
-  [PurchaseOrderID] [int] NOT NULL,
-  [PurchaseOrderDetailID] [int] IDENTITY,
+  [added] [int] NULL,
   [DueDate] [datetime] NOT NULL,
+  [LineTotal] AS (isnull([OrderQty]*[UnitPrice],(0.00))),
+  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_PurchaseOrderDetail_ModifiedDate] DEFAULT (getdate()),
   [OrderQty] [smallint] NOT NULL,
   [ProductID] [int] NOT NULL,
-  [UnitPrice] [money] NOT NULL,
-  [LineTotal] AS (isnull([OrderQty]*[UnitPrice],(0.00))),
+  [PurchaseOrderDetailID] [int] IDENTITY,
+  [PurchaseOrderID] [int] NOT NULL,
   [ReceivedQty] [decimal](8, 2) NOT NULL,
   [RejectedQty] [decimal](8, 2) NOT NULL,
   [StockedQty] AS (isnull([ReceivedQty]-[RejectedQty],(0.00))),
-  [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_PurchaseOrderDetail_ModifiedDate] DEFAULT (getdate()),
+  [UnitPrice] [money] NOT NULL,
   CONSTRAINT [PK_PurchaseOrderDetail_PurchaseOrderID_PurchaseOrderDetailID] PRIMARY KEY CLUSTERED ([PurchaseOrderID], [PurchaseOrderDetailID]),
   CONSTRAINT [CK_PurchaseOrderDetail_OrderQty] CHECK ([OrderQty]>(0)),
   CONSTRAINT [CK_PurchaseOrderDetail_ReceivedQty] CHECK ([ReceivedQty]>=(0.00)),
@@ -24,55 +25,6 @@ GO
 CREATE INDEX [IX_PurchaseOrderDetail_ProductID]
   ON [Purchasing].[PurchaseOrderDetail] ([ProductID])
   ON [PRIMARY]
-GO
-
-SET QUOTED_IDENTIFIER, ANSI_NULLS ON
-GO
-
-CREATE TRIGGER [iPurchaseOrderDetail] ON [Purchasing].[PurchaseOrderDetail] 
-AFTER INSERT AS
-BEGIN
-DECLARE @Count int;
-SET @Count = @@ROWCOUNT;
-IF @Count = 0 
-RETURN;
-SET NOCOUNT ON;
-BEGIN TRY
-INSERT INTO [Production].[TransactionHistory]
-([ProductID]
-,[ReferenceOrderID]
-,[ReferenceOrderLineID]
-,[TransactionType]
-,[TransactionDate]
-,[Quantity]
-,[ActualCost])
-SELECT 
-inserted.[ProductID]
-,inserted.[PurchaseOrderID]
-,inserted.[PurchaseOrderDetailID]
-,'P'
-,GETDATE()
-,inserted.[OrderQty]
-,inserted.[UnitPrice]
-FROM inserted 
-INNER JOIN [Purchasing].[PurchaseOrderHeader] 
-ON inserted.[PurchaseOrderID] = [Purchasing].[PurchaseOrderHeader].[PurchaseOrderID];
-UPDATE [Purchasing].[PurchaseOrderHeader]
-SET [Purchasing].[PurchaseOrderHeader].[SubTotal] = 
-(SELECT SUM([Purchasing].[PurchaseOrderDetail].[LineTotal])
-FROM [Purchasing].[PurchaseOrderDetail]
-WHERE [Purchasing].[PurchaseOrderHeader].[PurchaseOrderID] = [Purchasing].[PurchaseOrderDetail].[PurchaseOrderID])
-WHERE [Purchasing].[PurchaseOrderHeader].[PurchaseOrderID] IN (SELECT inserted.[PurchaseOrderID] FROM inserted);
-END TRY
-BEGIN CATCH
-EXECUTE [dbo].[uspPrintError];
-IF @@TRANCOUNT > 0
-BEGIN
-ROLLBACK TRANSACTION;
-END
-EXECUTE [dbo].[uspLogError];
-END CATCH;
-END;
 GO
 
 SET QUOTED_IDENTIFIER, ANSI_NULLS ON
@@ -134,10 +86,59 @@ END CATCH;
 END;
 GO
 
-EXEC sys.sp_addextendedproperty N'MS_Description', N'AFTER INSERT trigger that inserts a row in the TransactionHistory table and updates the PurchaseOrderHeader.SubTotal column.', 'SCHEMA', N'Purchasing', 'TABLE', N'PurchaseOrderDetail', 'TRIGGER', N'iPurchaseOrderDetail'
+SET QUOTED_IDENTIFIER, ANSI_NULLS ON
+GO
+
+CREATE TRIGGER [iPurchaseOrderDetail] ON [Purchasing].[PurchaseOrderDetail] 
+AFTER INSERT AS
+BEGIN
+DECLARE @Count int;
+SET @Count = @@ROWCOUNT;
+IF @Count = 0 
+RETURN;
+SET NOCOUNT ON;
+BEGIN TRY
+INSERT INTO [Production].[TransactionHistory]
+([ProductID]
+,[ReferenceOrderID]
+,[ReferenceOrderLineID]
+,[TransactionType]
+,[TransactionDate]
+,[Quantity]
+,[ActualCost])
+SELECT 
+inserted.[ProductID]
+,inserted.[PurchaseOrderID]
+,inserted.[PurchaseOrderDetailID]
+,'P'
+,GETDATE()
+,inserted.[OrderQty]
+,inserted.[UnitPrice]
+FROM inserted 
+INNER JOIN [Purchasing].[PurchaseOrderHeader] 
+ON inserted.[PurchaseOrderID] = [Purchasing].[PurchaseOrderHeader].[PurchaseOrderID];
+UPDATE [Purchasing].[PurchaseOrderHeader]
+SET [Purchasing].[PurchaseOrderHeader].[SubTotal] = 
+(SELECT SUM([Purchasing].[PurchaseOrderDetail].[LineTotal])
+FROM [Purchasing].[PurchaseOrderDetail]
+WHERE [Purchasing].[PurchaseOrderHeader].[PurchaseOrderID] = [Purchasing].[PurchaseOrderDetail].[PurchaseOrderID])
+WHERE [Purchasing].[PurchaseOrderHeader].[PurchaseOrderID] IN (SELECT inserted.[PurchaseOrderID] FROM inserted);
+END TRY
+BEGIN CATCH
+EXECUTE [dbo].[uspPrintError];
+IF @@TRANCOUNT > 0
+BEGIN
+ROLLBACK TRANSACTION;
+END
+EXECUTE [dbo].[uspLogError];
+END CATCH;
+END;
 GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'AFTER UPDATE trigger that inserts a row in the TransactionHistory table, updates ModifiedDate in PurchaseOrderDetail and updates the PurchaseOrderHeader.SubTotal column.', 'SCHEMA', N'Purchasing', 'TABLE', N'PurchaseOrderDetail', 'TRIGGER', N'uPurchaseOrderDetail'
+GO
+
+EXEC sys.sp_addextendedproperty N'MS_Description', N'AFTER INSERT trigger that inserts a row in the TransactionHistory table and updates the PurchaseOrderHeader.SubTotal column.', 'SCHEMA', N'Purchasing', 'TABLE', N'PurchaseOrderDetail', 'TRIGGER', N'iPurchaseOrderDetail'
 GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Individual products associated with a specific purchase order. See PurchaseOrderHeader.', 'SCHEMA', N'Purchasing', 'TABLE', N'PurchaseOrderDetail'
@@ -172,3 +173,35 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing PurchaseOrderHeader.PurchaseOrderID.', 'SCHEMA', N'Purchasing', 'TABLE', N'PurchaseOrderDetail', 'CONSTRAINT', N'FK_PurchaseOrderDetail_PurchaseOrderHeader_PurchaseOrderID'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

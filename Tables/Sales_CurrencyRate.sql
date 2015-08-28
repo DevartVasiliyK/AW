@@ -1,11 +1,12 @@
 ﻿CREATE TABLE [Sales].[CurrencyRate] (
-  [CurrencyRateID] [int] IDENTITY,
-  [CurrencyRateDate] [datetime] NOT NULL,
-  [FromCurrencyCode] [nchar](3) NOT NULL,
-  [ToCurrencyCode] [nchar](3) NOT NULL,
+  [added] [int] NULL,
   [AverageRate] [money] NOT NULL,
+  [CurrencyRateDate] [datetime] NOT NULL,
+  [CurrencyRateID] [int] IDENTITY,
   [EndOfDayRate] [money] NOT NULL,
+  [FromCurrencyCode] [nchar](3) NOT NULL,
   [ModifiedDate] [datetime] NOT NULL CONSTRAINT [DF_CurrencyRate_ModifiedDate] DEFAULT (getdate()),
+  [ToCurrencyCode] [nchar](3) NOT NULL,
   CONSTRAINT [PK_CurrencyRate_CurrencyRateID] PRIMARY KEY CLUSTERED ([CurrencyRateID]),
   CONSTRAINT [FK_CurrencyRate_Currency_FromCurrencyCode] FOREIGN KEY ([fromcurrencycode]) REFERENCES [Sales].[Currency] ([currencycode]),
   CONSTRAINT [FK_CurrencyRate_Currency_ToCurrencyCode] FOREIGN KEY ([tocurrencycode]) REFERENCES [Sales].[Currency] ([currencycode])
@@ -38,3 +39,19 @@ GO
 
 EXEC sys.sp_addextendedproperty N'MS_Description', N'Foreign key constraint referencing Currency.ToCurrencyCode.', 'SCHEMA', N'Sales', 'TABLE', N'CurrencyRate', 'CONSTRAINT', N'FK_CurrencyRate_Currency_ToCurrencyCode'
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
